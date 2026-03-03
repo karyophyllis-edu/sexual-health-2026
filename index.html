@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σεξουαλική Υγεία 2026 - Πύλη Μαθητή</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Greek:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'IBM Plex Sans Greek', sans-serif;
+            background-color: #fafaf9;
+        }
+        .nav-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="max-w-4xl w-full text-center">
+        <header class="mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-stone-900 mb-6">Σεξουαλική Υγεία <span class="text-teal-700">2026</span></h1>
+            <p class="text-lg text-stone-500">Καλώς ήρθατε στην εκπαιδευτική πλατφόρμα. Επιλέξτε μια ενότητα για να ξεκινήσετε την εξερεύνηση.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Stats & Intro -->
+            <a href="intro.html" class="nav-card bg-white p-8 rounded-[2.5rem] border border-stone-200 flex flex-col items-center group">
+                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">📊</div>
+                <h2 class="text-xl font-bold text-stone-800 mb-3">Δεδομένα 2026</h2>
+                <p class="text-sm text-stone-500">Στατιστικά για την αντισύλληψη και τις εγκυμοσύνες παγκοσμίως και στην Ελλάδα.</p>
+                <div class="mt-6 text-teal-700 font-bold text-sm uppercase tracking-widest">Είσοδος ➔</div>
+            </a>
+
+            <!-- Card 2: STIs -->
+            <a href="stis.html" class="nav-card bg-white p-8 rounded-[2.5rem] border border-stone-200 flex flex-col items-center group">
+                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">🦠</div>
+                <h2 class="text-xl font-bold text-stone-800 mb-3">Σ.Μ.Ν.</h2>
+                <p class="text-sm text-stone-500">Η "σιωπηλή" άνοδος των νοσημάτων. Δείτε τις τάσεις και τους κινδύνους.</p>
+                <div class="mt-6 text-teal-700 font-bold text-sm uppercase tracking-widest">Είσοδος ➔</div>
+            </a>
+
+            <!-- Card 3: Myths -->
+            <a href="myths.html" class="nav-card bg-white p-8 rounded-[2.5rem] border border-stone-200 flex flex-col items-center group">
+                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">🤔</div>
+                <h2 class="text-xl font-bold text-stone-800 mb-3">Μύθοι & Αλήθειες</h2>
+                <p class="text-sm text-stone-500">Καταρρίψτε τις πιο συχνές παρανοήσεις μέσα από διαδραστικές κάρτες.</p>
+                <div class="mt-6 text-teal-700 font-bold text-sm uppercase tracking-widest">Είσοδος ➔</div>
+            </a>
+
+        </div>
+
+        <footer class="mt-20 text-stone-400 text-xs uppercase tracking-[0.2em]">
+            Εκπαιδευτικό Υλικό • Καθηγητής: Δημοσθένης Καρυοφύλλης
+        </footer>
+    </div>
+
+</body>
+</html>
