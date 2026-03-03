@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Μύθος vs Πραγματικότητα: Σεξουαλική Υγεία 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Greek:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'IBM Plex Sans Greek', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* 3D Flip Card Logic */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Intense Transition Colors */
+        .flip-card-front {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #f1f5f9;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .myth-label {
+            color: #fb7185;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .truth-label {
+            color: #a7f3d0;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .pulse-hint {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        
+        <!-- Header & Plan A -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                Σεξουαλική Υγεία: <span class="text-emerald-600">Η Αλήθεια</span>
+            </h1>
+            
+            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-3xl p-8 max-w-3xl mx-auto mb-12">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="text-5xl">🛡️</div>
+                    <div class="text-left">
+                        <h2 class="text-xl font-bold text-emerald-900 mb-2">Πρόληψη: Το δικό σου "Plan A"</h2>
+                        <p class="text-emerald-800 leading-relaxed">
+                            Το προφυλακτικό είναι ο **ακρογωνιαίος λίθος** της σεξουαλικής υγείας. Ακόμα κι αν χρησιμοποιείς άλλες μεθόδους αντισύλληψης (χάπι, σπείραμα), το προφυλακτικό παραμένει η μόνη μέθοδος που προστατεύει από τα ΣΜΝ.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-slate-500 font-medium">Κάνε κλικ στις κάρτες για να καταρρίψεις τους μύθους</p>
+        </header>
+
+        <!-- Myths Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Card 1 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="myth-label">Μύθος #1</span>
+                        <h3 class="text-xl font-bold mb-4">"Δύο προφυλακτικά μαζί προσφέρουν διπλή προστασία."</h3>
+                        <div class="mt-8 text-slate-400 text-xs pulse-hint">ΚΛΙΚ ΓΙΑ ΤΗΝ ΑΛΗΘΕΙΑ ➔</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="truth-label">Η Πραγματικότητα</span>
+                        <p class="text-lg font-medium leading-relaxed mb-4">Όχι, το αντίθετο!</p>
+                        <p class="text-sm opacity-90">Η τριβή ανάμεσα στα δύο στρώματα λάτεξ αυξάνει κατακόρυφα την πιθανότητα να σπάσουν και τα δύο. Ένα προφυλακτικό, σωστά τοποθετημένο, είναι η ασφαλέστερη επιλογή.</p>
+                        <div class="mt-6 pt-4 border-t border-white/20 text-xs italic">
+                            💡 Tip: Συνδύασε το με χάπι ή σπείραμα για έξτρα ασφάλεια.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="myth-label">Μύθος #2</span>
+                        <h3 class="text-xl font-bold mb-4">"Δεν έχω συμπτώματα, άρα δεν έχω κάποιο νόσημα."</h3>
+                        <div class="mt-8 text-slate-400 text-xs pulse-hint">ΚΛΙΚ ΓΙΑ ΤΗΝ ΑΛΗΘΕΙΑ ➔</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="truth-label">Η Πραγματικότητα</span>
+                        <p class="text-sm leading-relaxed mb-4">Πολλά ΣΜΝ (χλαμύδια, γονόρροια, HIV) παραμένουν **ασυμπτωματικά** για μήνες ή χρόνια.</p>
+                        <p class="text-sm font-bold">Το άτομο νιώθει υγιές, αλλά ο ιός προκαλεί εσωτερική ζημιά και μεταδίδεται.</p>
+                        <div class="mt-6 pt-4 border-t border-white/20 text-xs uppercase font-bold tracking-tighter">
+                            Συμπέρασμα: Check-up προληπτικά!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="myth-label">Μύθος #3</span>
+                        <h3 class="text-xl font-bold mb-4">"Το χάπι της επόμενης ημέρας είναι κανονική αντισύλληψη."</h3>
+                        <div class="mt-8 text-slate-400 text-xs pulse-hint">ΚΛΙΚ ΓΙΑ ΤΗΝ ΑΛΗΘΕΙΑ ➔</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="truth-label">Η Πραγματικότητα</span>
+                        <p class="text-lg font-bold mb-2">Είναι μόνο "Επείγουσα".</p>
+                        <p class="text-sm leading-relaxed mb-4">Δεν προστατεύει από ΣΜΝ και η συχνή χρήση απορρυθμίζει τον κύκλο.</p>
+                        <p class="bg-white/20 p-3 rounded-lg text-xs">
+                            **Fact:** Όσο πιο γρήγορα ληφθεί (ιδανικά εντός 12-24 ωρών), τόσο πιο αποτελεσματικό είναι.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="myth-label">Μύθος #4</span>
+                        <h3 class="text-xl font-bold mb-4">"Δεν κινδυνεύω από το στοματικό σεξ."</h3>
+                        <div class="mt-8 text-slate-400 text-xs pulse-hint">ΚΛΙΚ ΓΙΑ ΤΗΝ ΑΛΗΘΕΙΑ ➔</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="truth-label">Η Πραγματικότητα</span>
+                        <p class="text-lg font-bold mb-2">Κολλάς κανονικά.</p>
+                        <p class="text-sm leading-relaxed mb-4">Σύφιλη, έρπης, γονόρροια και HPV μεταδίδονται εύκολα μέσω του βλεννογόνου του στόματος.</p>
+                        <div class="bg-white/20 p-3 rounded-lg text-xs italic">
+                            Προστασία: Χρήση dental dams ή κανονικού προφυλακτικού.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="flip-card lg:col-start-2 lg:col-end-3" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="myth-label">Μύθος #5</span>
+                        <h3 class="text-xl font-bold mb-4">"Ο HIV παραμένει μια θανατηφόρα καταδίκη το 2026."</h3>
+                        <div class="mt-8 text-slate-400 text-xs pulse-hint">ΚΛΙΚ ΓΙΑ ΤΗΝ ΑΛΗΘΕΙΑ ➔</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="truth-label">Η Πραγματικότητα</span>
+                        <p class="text-lg font-bold mb-2">Χρόνια Διαχειρίσιμη Πάθηση.</p>
+                        <p class="text-sm mb-4 leading-relaxed">Με την αγωγή, το ιικό φορτίο γίνεται "μη ανιχνεύσιμο" (U=U), που σημαίνει **μηδενική μετάδοση**.</p>
+                        <div class="bg-white/20 p-3 rounded-lg text-xs">
+                            **Ελλάδα 2026:** Διαθέσιμη η **PrEP** (χάπι πρόληψης) για άτομα αρνητικά στον ιό.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Call to Action -->
+        <footer class="text-center bg-slate-100 rounded-[2rem] p-10 border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">Μην αφήνεις την υγεία σου στην τύχη</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mb-8 text-sm">
+                Η ενημέρωση είναι το πρώτο βήμα. Ο ειλικρινής διάλογος με τον σύντροφό σου και ο τακτικός ιατρικός έλεγχος είναι πράξεις αυτοσεβασμού.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-4 py-2 bg-white rounded-full text-xs font-bold text-slate-500 shadow-sm border border-slate-200">#SexualHealth2026</span>
+                <span class="px-4 py-2 bg-white rounded-full text-xs font-bold text-slate-500 shadow-sm border border-slate-200">#SafeSex</span>
+                <span class="px-4 py-2 bg-white rounded-full text-xs font-bold text-slate-500 shadow-sm border border-slate-200">#KnowTheTruth</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Optional: Simple log to confirm interactions work
+        console.log("Infographic loaded. Interactive flip cards active.");
+    </script>
+</body>
+</html>

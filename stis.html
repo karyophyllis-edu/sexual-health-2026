@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΣΜΝ: Η Σιωπηλή Άνοδος - Διαδραστική Αναφορά</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Warm Minimalist. Background: #fdfaf7 (Stone-50/Orange-50 blend). Primary: Slate-800. Accents: Amber-600 (Warning), Crimson-700 (High Risk), Teal-700 (Health/Prevention). -->
+    <!-- Application Structure Plan: Η δομή ακολουθεί μια "αφηγηματική" ροή (Storytelling). Ξεκινά με την παγκόσμια προειδοποίηση, προχωρά στην Ευρώπη και κορυφώνεται στα δεδομένα της Ελλάδας. Όλα τα κρίσιμα δεδομένα (αριθμοί, περιγραφές και γραφήματα) είναι κρυμμένα πίσω από διαδραστικά "Reveal Boxes" με εφέ θολώματος. Αυτό επιλέχθηκε για να τονιστεί η έννοια της "Σιωπηλής" ανόδου – η πληροφορία υπάρχει αλλά ο χρήστης πρέπει να επιλέξει να την "δει" ενεργά, κάνοντας την αποκάλυψη των ραγδαίων αυξήσεων πιο εντυπωσιακή. -->
+    <!-- Visualization & Content Choices: 
+        1. Global Trends -> Flip Cards με στατιστικά που αποκαλύπτονται με κλικ.
+        2. Greece Data -> Multiplier Cards όπου πλέον και η περιγραφή είναι κρυμμένη για μέγιστο impact.
+        3. Trend Chart -> Το γράφημα της Ελλάδας είναι πλέον ένα αυτόνομο Reveal Box.
+        4. HIV/HPV -> Στατικά blocks για σύγκριση πλαισίου.
+        Επιβεβαίωση: Χρήση Canvas για γραφήματα, Tailwind για το layout. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'IBM+Plex+Sans+Arabic', sans-serif;
+            background-color: #fdfaf7;
+            color: #1c1917;
+        }
+
+        .reveal-box {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reveal-box:hover {
+            transform: scale(1.01);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .hidden-item {
+            filter: blur(10px);
+            opacity: 0.1;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .revealed .hidden-item {
+            filter: blur(0);
+            opacity: 1;
+        }
+
+        .reveal-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.01);
+            z-index: 10;
+            transition: opacity 0.4s ease;
+        }
+
+        .revealed .reveal-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            height: 300px;
+        }
+
+        .counter-animate {
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+
+        .tap-hint {
+            animation: subtle-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="max-w-5xl mx-auto px-6 py-12">
+        
+        <!-- Hero Section -->
+        <header class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-stone-900 mb-6 leading-tight">
+                Σεξουαλικώς Μεταδιδόμενα Νοσήματα:<br>
+                <span class="text-rose-700">Η "Σιωπηλή" Άνοδος</span>
+            </h1>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-stone-600 mb-4">
+                    Τα τελευταία στοιχεία από τον <strong>WHO</strong> και το <strong>ECDC</strong> (2024-2025) κρούουν τον κώδωνα του κινδύνου. 
+                </p>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-stone-200 rounded-full text-stone-700 text-sm font-semibold">
+                    <span>⚠️ Ραγδαία αύξηση κρουσμάτων παγκοσμίως & στην Ευρώπη</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Global & EU Section -->
+        <section class="mb-24">
+            <h2 class="text-2xl font-bold text-stone-800 mb-10 flex items-center gap-3">
+                <span class="bg-stone-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm italic">i</span>
+                Παγκόσμιο Επίπεδο & Ευρώπη
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Σύφιλη -->
+                <div class="reveal-box bg-white p-8 rounded-3xl border border-stone-100 shadow-sm text-center" onclick="revealData(this)">
+                    <div class="reveal-overlay"><span class="tap-hint text-stone-400 font-bold text-xs uppercase tracking-widest">Κάντε κλικ</span></div>
+                    <div class="text-4xl mb-4">🔴</div>
+                    <h3 class="text-xl font-bold mb-4">Σύφιλη</h3>
+                    <div class="hidden-item text-5xl font-black text-rose-700 mb-4 tracking-tighter">+30%</div>
+                    <div class="hidden-item text-sm text-stone-500">Διαγνώσεις στην Ευρώπη την τελευταία τριετία</div>
+                </div>
+
+                <!-- Γονόρροια -->
+                <div class="reveal-box bg-white p-8 rounded-3xl border border-stone-100 shadow-sm text-center" onclick="revealData(this)">
+                    <div class="reveal-overlay"><span class="tap-hint text-stone-400 font-bold text-xs uppercase tracking-widest">Κάντε κλικ</span></div>
+                    <div class="text-4xl mb-4">🟠</div>
+                    <h3 class="text-xl font-bold mb-4">Γονόρροια</h3>
+                    <div class="hidden-item text-5xl font-black text-amber-600 mb-4 tracking-tighter">+50%</div>
+                    <div class="hidden-item text-sm text-stone-500">Σε ορισμένες χώρες της ΕΕ (Super-gonorrhea)</div>
+                </div>
+
+                <!-- Χλαμύδια -->
+                <div class="bg-stone-900 p-8 rounded-3xl text-white text-center">
+                    <div class="text-4xl mb-4">⚪</div>
+                    <h3 class="text-xl font-bold mb-4">Χλαμύδια</h3>
+                    <div class="text-2xl font-semibold mb-4 text-stone-300 italic">#1 Συχνότερο</div>
+                    <p class="text-sm text-stone-400">Συχνά χωρίς συμπτώματα. Κίνδυνος υπογονιμότητας αν δεν θεραπευτούν.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Greece Focus Section -->
+        <section class="mb-24 bg-stone-100 p-8 md:p-12 rounded-[3rem] border border-stone-200">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-stone-900 mb-4">Στοιχεία για την Ελλάδα</h2>
+                <p class="text-stone-600">Δεδομένα ΕΟΔΥ 2025: Ανησυχητικοί ρυθμοί που ακολουθούν την ευρωπαϊκή τάση.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <!-- Γονόρροια Greece -->
+                    <div class="reveal-box bg-white p-6 rounded-2xl border border-rose-200 flex items-center gap-6" onclick="revealData(this)">
+                        <div class="reveal-overlay"></div>
+                        <div class="w-20 h-20 bg-rose-50 rounded-xl flex items-center justify-center text-4xl">🔬</div>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Γονόρροια</h4>
+                            <div class="hidden-item">
+                                <div class="text-4xl font-black text-rose-700 counter-animate">3X</div>
+                                <p class="text-xs text-stone-500">Αύξηση σε σχέση με το 2020</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Σύφιλη Greece -->
+                    <div class="reveal-box bg-white p-6 rounded-2xl border border-amber-200 flex items-center gap-6" onclick="revealData(this)">
+                        <div class="reveal-overlay"></div>
+                        <div class="w-20 h-20 bg-amber-50 rounded-xl flex items-center justify-center text-4xl">📈</div>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Σύφιλη</h4>
+                            <div class="hidden-item">
+                                <div class="text-4xl font-black text-amber-600 counter-animate">2X</div>
+                                <p class="text-xs text-stone-500">Διπλασιασμός (ιδιαίτερα νέοι 20-30 ετών)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-box bg-white p-8 rounded-3xl shadow-sm h-full flex flex-col justify-center min-h-[350px]" onclick="revealData(this)">
+                    <div class="reveal-overlay bg-white/80 backdrop-blur-sm rounded-3xl">
+                        <div class="text-center">
+                            <span class="text-4xl mb-2 block">📊</span>
+                            <span class="tap-hint text-stone-500 font-bold text-xs uppercase tracking-widest">Δείτε την τάση στην Ελλάδα</span>
+                        </div>
+                    </div>
+                    <div class="hidden-item">
+                        <h4 class="font-bold text-stone-800 mb-6 text-center">Τάση Κρουσμάτων στην Ελλάδα</h4>
+                        <div class="chart-container">
+                            <canvas id="greeceTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Conditions Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+            <div class="bg-teal-50 p-10 rounded-3xl border border-teal-100">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="text-4xl">🎗️</div>
+                    <h3 class="text-2xl font-bold text-teal-900">HIV / AIDS</h3>
+                </div>
+                <p class="text-teal-800 mb-6 leading-relaxed">
+                    Η κατάσταση παραμένει <strong>σταθερή</strong> με ελαφρώς πτωτική τάση. Η Ελλάδα εστιάζει πλέον στη χρήση της <strong>PrEP</strong> (Προληπτική Αγωγή) για τη μείωση της μετάδοσης.
+                </p>
+                <div class="bg-white/50 p-4 rounded-xl text-xs text-teal-700">
+                    ℹ️ Η PrEP μειώνει τον κίνδυνο μετάδοσης κατά σχεδόν 99% μέσω σεξουαλικής επαφής.
+                </div>
+            </div>
+
+            <div class="bg-stone-800 p-10 rounded-3xl text-white">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="text-4xl">🧬</div>
+                    <h3 class="text-2xl font-bold">HPV</h3>
+                </div>
+                <p class="text-stone-300 mb-6 leading-relaxed">
+                    Παραμένει το <strong>πιο διαδεδομένο</strong> ΣΜΝ στον ελληνικό πληθυσμό. Παρόλο που ο εμβολιασμός βοηθά σημαντικά, η πρόληψη παραμένει κρίσιμη.
+                </p>
+                <div class="flex items-center gap-2 text-amber-400 font-bold">
+                    <span>●</span> Δωρεάν εμβολιασμός για αγόρια & κορίτσια στην Ελλάδα.
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Section -->
+        <section class="border-t-2 border-stone-200 pt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-stone-900">Γιατί συμβαίνει αυτή η αύξηση;</h2>
+                <p class="text-stone-500 mt-2 italic">Σημαντική Σημείωση (Note)</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="flex gap-6 items-start">
+                    <div class="text-4xl grayscale">🛡️</div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Μείωση χρήσης προφυλακτικού</h4>
+                        <p class="text-stone-600 text-sm">Λόγω της "εμπιστοσύνης" σε άλλες μεθόδους αντισύλληψης που όμως δεν προστατεύουν από ΣΜΝ.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="text-4xl grayscale">🧪</div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Αύξηση διαγνωστικών τεστ</h4>
+                        <p class="text-stone-600 text-sm">Πλέον γίνονται περισσότερα τεστ, αποκαλύπτοντας κρούσματα που παλαιότερα παρέμεναν αδιάγνωστα.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-32 text-center text-stone-400 text-xs">
+            <p>Δεδομένα: WHO, ECDC (2024-2025), ΕΟΔΥ (2025)</p>
+            <p class="mt-2 text-stone-300 uppercase tracking-tighter">Εκπαιδευτικό Υλικό • 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Reveal Interaction Logic
+        function revealData(element) {
+            if (!element.classList.contains('revealed')) {
+                element.classList.add('revealed');
+                
+                // If it's the chart container, we might want to trigger a re-animation of the chart
+                const canvas = element.querySelector('canvas');
+                if (canvas && window.myTrendChart) {
+                    window.myTrendChart.update();
+                }
+            }
+        }
+
+        // Initialize Charts on Load
+        window.onload = function() {
+            const ctx = document.getElementById('greeceTrendChart').getContext('2d');
+            
+            window.myTrendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'Σχετική Αύξηση',
+                        data: [1, 1.2, 1.8, 2.4, 2.8, 3.2],
+                        borderColor: '#b91c1c', 
+                        backgroundColor: 'rgba(185, 28, 28, 0.05)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#b91c1c'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1c1917',
+                            padding: 12,
+                            titleFont: { size: 10 },
+                            bodyFont: { size: 12 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            display: false,
+                            beginAtZero: true
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#a8a29e', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

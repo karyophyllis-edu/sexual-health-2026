@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Παρατηρητήριο Σεξουαλικής Υγείας: 2025 vs Παρελθόν</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Slate & Crimson Crisis. Background: #f8fafc. Primary: #0f172a. Accents: #e11d48 (Crisis), #0d9488 (Health). -->
+    <!-- Application Structure Plan: Η δομή αναβαθμίστηκε σε "Συγκριτικό Πλέγμα 3 Επιπέδων". Κάθε σειρά (Κόσμος, Ευρώπη, Ελλάδα) περιέχει 3 κάρτες για τις ίδιες μετρικές (Εγκυμοσύνες, Εκτρώσεις, ΣΜΝ). Αυτό επιτρέπει στον χρήστη να συγκρίνει άμεσα τα μεγέθη. Η αλληλεπίδραση "Reveal" παραμένει για να τονίσει την αποκάλυψη των δεδομένων, ειδικά για την Ελλάδα όπου τα νούμερα είναι συχνά "κρυμμένα" από τη δημόσια συζήτηση. -->
+    <!-- Visualization & Content Choices: 
+        1. Global Row -> UNFPA/WHO data.
+        2. Europe Row -> ECDC/WHO Europe data.
+        3. Greece Row -> ΕΟΔΥ/Scientific Societies estimates (150k abortions, 3x Gonorrhea).
+        4. No SVG/Mermaid confirmed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Greek:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'IBM Plex Sans Greek', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .reveal-data {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blur-val {
+            filter: blur(10px);
+            opacity: 0.1;
+            transition: all 0.8s ease;
+        }
+
+        .revealed .blur-val {
+            filter: blur(0);
+            opacity: 1;
+        }
+
+        .impact-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            border-color: #cbd5e1;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .section-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block px-4 py-1 bg-rose-500 rounded-full text-xs font-bold mb-6 animate-pulse uppercase tracking-widest">Εκπαιδευτικό Εργαλείο 2025</span>
+            <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight">Συγκριτικό Παρατηρητήριο</h1>
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto">
+                Ανάλυση δεδομένων 2025: Από το παγκόσμιο επίπεδο στην ελληνική πραγματικότητα. 
+            </p>
+        </div>
+    </section>
+
+    <!-- Interactive Metrics Table -->
+    <main class="max-w-7xl mx-auto px-6 -mt-8 pb-24">
+        
+        <!-- ROW 1: ΠΑΓΚΟΣΜΙΟ ΕΠΙΠΕΔΟ -->
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-slate-900 text-white p-2 rounded-lg font-bold text-xs uppercase tracking-widest">Επίπεδο 1</div>
+                <h2 class="text-xl font-bold text-slate-800">Παγκόσμια Δεδομένα (World)</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Ανεπιθύμητες Κυήσεις</h3>
+                    <div class="text-3xl font-black text-slate-900 mb-2 blur-val">121 εκ.</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Σχεδόν το <strong>48%</strong> των κυήσεων παγκοσμίως είναι απρογραμμάτιστες το 2025.</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Εκτρώσεις</h3>
+                    <div class="text-3xl font-black text-slate-900 mb-2 blur-val">73 εκ.</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">3 στις 10 κυήσεις καταλήγουν σε έκτρωση παγκοσμίως.</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Νέα Κρούσματα ΣΜΝ</h3>
+                    <div class="text-3xl font-black text-rose-600 mb-2 blur-val">374 εκ.</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Ετήσια νέα περιστατικά ιάσιμων ΣΜΝ (Σύφιλη, Γονόρροια κ.α.).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROW 2: ΕΥΡΩΠΗ -->
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xs uppercase tracking-widest">Επίπεδο 2</div>
+                <h2 class="text-xl font-bold text-slate-800">Ευρωπαϊκή Ένωση (Europe)</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Ανεπιθύμητες Κυήσεις</h3>
+                    <div class="text-3xl font-black text-slate-900 mb-2 blur-val">~43%</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Ποσοστό επί των συνολικών κυήσεων στην Ευρώπη (UNFPA estimate).</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Εκτρώσεις</h3>
+                    <div class="text-3xl font-black text-slate-900 mb-2 blur-val">11 εκ.</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Εκτιμώμενος αριθμός στην ευρύτερη Ευρωπαϊκή περιοχή του ΠΟΥ.</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-slate-400 text-[10px] font-bold uppercase mb-2">Αύξηση ΣΜΝ</h3>
+                    <div class="text-3xl font-black text-rose-600 mb-2 blur-val">+48%</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Εντυπωσιακή άνοδος της Γονόρροιας στην ΕΕ την τελευταία 5ετία (ECDC).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROW 3: ΕΛΛΑΔΑ -->
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-rose-700 text-white p-2 rounded-lg font-bold text-xs uppercase tracking-widest">Επίπεδο 3</div>
+                <h2 class="text-xl font-bold text-slate-800">Ελλάδα (Greece)</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="impact-card p-6 rounded-2xl border-rose-200 reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-rose-400 text-[10px] font-bold uppercase mb-2">Ανεπιθύμητες Κυήσεις</h3>
+                    <div class="text-3xl font-black text-slate-900 mb-2 blur-val">~50%</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Εκτίμηση λόγω χαμηλής χρήσης σύγχρονων μεθόδων αντισύλληψης.</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl border-rose-200 reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-rose-400 text-[10px] font-bold uppercase mb-2">Εκτρώσεις</h3>
+                    <div class="text-3xl font-black text-rose-700 mb-2 blur-val">150.000</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Ετήσια εκτίμηση επιστημονικών φορέων. **Από τις υψηλότερες στην ΕΕ**.</p>
+                </div>
+                <div class="impact-card p-6 rounded-2xl border-rose-200 reveal-data" onclick="this.classList.add('revealed')">
+                    <h3 class="text-rose-400 text-[10px] font-bold uppercase mb-2">Κρούσματα Γονόρροιας</h3>
+                    <div class="text-3xl font-black text-rose-600 mb-2 blur-val">3X</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Τριπλασιασμός των διαγνώσεων στην Ελλάδα σε σχέση με το 2020 (ΕΟΔΥ).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: The Trend Visualization -->
+        <section class="bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-100 mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Η Σύγκλιση των Δεδομένων</h2>
+                    <p class="text-slate-600 mb-6 text-sm">
+                        Το γράφημα δείχνει την απότομη άνοδο των ΣΜΝ στην Ελλάδα την τελευταία δεκαετία. Η έλλειψη σεξουαλικής αγωγής και η "κούραση" από το προφυλακτικό οδηγούν σε ιστορικά υψηλά επίπεδα.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div class="text-xs font-bold text-slate-400 uppercase mb-2">Συμπέρασμα 2025</div>
+                        <p class="text-sm font-medium text-slate-700 italic">"Η αντισύλληψη στην Ελλάδα παραμένει ελλιπής, με την έκτρωση να χρησιμοποιείται συχνά ως 'λύση ανάγκης', ενώ τα ΣΜΝ διαδίδονται ταχύτερα από ποτέ."</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="stiComparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-12 border-t border-slate-200">
+        <p class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">Παρατηρητήριο Σεξουαλικής Υγείας 2026 • Δεδομένα ΕΟΔΥ / WHO / ECDC</p>
+    </footer>
+
+    <script>
+        Chart.defaults.font.family = "'IBM Plex Sans Greek', sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        const ctxSTI = document.getElementById('stiComparisonChart').getContext('2d');
+        new Chart(ctxSTI, {
+            type: 'line',
+            data: {
+                labels: ['2015', '2017', '2019', '2021', '2023', '2025'],
+                datasets: [
+                    {
+                        label: 'Γονόρροια (Ελλάδα)',
+                        data: [400, 550, 780, 1100, 1900, 2600],
+                        borderColor: '#e11d48',
+                        backgroundColor: 'rgba(225, 29, 72, 0.05)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#e11d48'
+                    },
+                    {
+                        label: 'Σύφιλη (Ελλάδα)',
+                        data: [300, 350, 410, 520, 750, 980],
+                        borderColor: '#f59e0b',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 4,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
